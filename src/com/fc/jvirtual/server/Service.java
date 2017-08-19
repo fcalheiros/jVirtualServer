@@ -21,8 +21,8 @@ public class Service {
 	private ServerSocket serverSocket;
 	
 	public void init() {
-		try (ServerSocket serverSocket = new ServerSocket(portFrom);) {
-			this.serverSocket = serverSocket;
+		try {
+			serverSocket = new ServerSocket(portFrom);
 			System.out.println(String.format("Start service %s.", name));
 			IntStream.range(0, nListeners).forEach(i -> (new Thread(new Listener(this))).start());
 		} catch (IOException e) {
@@ -69,10 +69,10 @@ public class Service {
 	public ServerSocket getServerSocket() {
 		return serverSocket;
 	}
+	@XmlElement
 	public void setTimeOut(Long timeOut) {
 		this.timeOut = timeOut;
 	}
-	@XmlElement
 	public Long getTimeOut() {
 		return timeOut;
 	}

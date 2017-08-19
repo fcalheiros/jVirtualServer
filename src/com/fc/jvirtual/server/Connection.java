@@ -23,9 +23,9 @@ public class Connection implements Cloneable {
 		System.out.println(String.format("Service %s connected to the %s:%d.", 
 				listener.getService().getName(), listener.getService().getHost(), listener.getService().getPortTo()));
 		resetTimer();
+		new Thread(this::checkInactifity).start();
 		new Thread(new Channel(this, socketFrom.getInputStream(), socketTo.getOutputStream())).start();
 		new Thread(new Channel(this, socketTo.getInputStream(), socketFrom.getOutputStream())).start();
-		new Thread(this::checkInactifity).start();
 	}
 
 	private void checkInactifity() {
