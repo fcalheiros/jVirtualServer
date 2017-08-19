@@ -51,12 +51,12 @@ public class Connection implements Cloneable {
 	}
 
 	public boolean isClose() {
-		return socketFrom.isClosed() || socketFrom.isClosed();
+		return socketFrom.isClosed() || socketTo.isClosed();
 	}
 
 	public void close() throws IOException {
-		socketFrom.close();
-		socketTo.close();
+		if (socketFrom.isClosed()) socketFrom.close();
+		if (socketTo.isClosed()) socketTo.close();
 		System.out.println(String.format("Service %s close.", listener.getService().getName()));
 	}
 

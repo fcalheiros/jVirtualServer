@@ -20,7 +20,7 @@ public class Channel implements Runnable {
 	@Override
 	public void run() {
 		try {	
-			while (connection.isClose()) {
+			while (!connection.isClose()) {
 				byte[] b = new byte[input.available()];
 				if (b.length > 0) {
 					input.read(b);
