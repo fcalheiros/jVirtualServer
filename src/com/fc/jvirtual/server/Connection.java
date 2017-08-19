@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class Connection {
+public class Connection implements Cloneable {
 
 	private Listener listener;
 	private Socket socketFrom;
@@ -49,7 +49,7 @@ public class Connection {
 	public void resetTimer() {
 		timeLastActivity = new Date().getTime();
 	}
-	
+
 	public boolean isClose() {
 		return socketFrom.isClosed() || socketFrom.isClosed();
 	}

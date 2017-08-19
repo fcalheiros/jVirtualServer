@@ -2,6 +2,7 @@ package com.fc.jvirtual.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.stream.IntStream;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -19,12 +20,15 @@ public class Service {
 	
 	private ServerSocket serverSocket;
 	
-	public void init() throws IOException {
-		serverSocket = new ServerSocket(portFrom);
-		System.out.println(String.format("Start service %s.", name));
-		for (int i = 0; i < nListeners; i++) {
-			new Thread(new Listener(this)).start();
+	public void init() {
+		try (ServerSocket serverSocket = new ServerSocket(portFrom);) {
+			this.serverSocket = serverSocket;
+			System.out.println(String.format("Start service %s.", name));
+			IntStream.range(0, nListeners).forEach(i -> (new Thread(new Listener(this))).start());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
 	} 
 	
 	public String getName() {
