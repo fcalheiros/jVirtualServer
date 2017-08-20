@@ -1,0 +1,9 @@
+<service>
+	<name>DB2</name>
+	<host>127.0.0.1</host>
+	<portFrom>9991</portFrom>
+	<portTo>9992</portTo>
+	<nListeners>4</nListeners>
+	<timeOut>60000</timeOut> 
+</service>
+

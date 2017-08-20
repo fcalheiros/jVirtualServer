@@ -19,7 +19,6 @@ public class Listener  implements Runnable {
 				System.out.println(String.format("Service %s listener in port %d", service.getName(), service.getPortFrom()));
 				Socket socketFrom = service.getServerSocket().accept();
 				Connection connection = new Connection(this, socketFrom);
-				System.out.println(String.format("Service %s connected to the %s:%d.", service.getName(), service.getHost(), service.getPortTo()));
 				connection.open();
 			}
 		} catch (IOException e) {
