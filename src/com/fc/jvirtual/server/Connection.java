@@ -1,11 +1,12 @@
 package com.fc.jvirtual.server;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class Connection implements Cloneable {
+public class Connection implements Closeable {
 
 	private Listener listener;
 	private Socket socketFrom;
@@ -54,6 +55,7 @@ public class Connection implements Cloneable {
 		return socketFrom.isClosed() || socketTo.isClosed();
 	}
 
+	@Override
 	public void close() throws IOException {
 		if (socketFrom.isClosed()) socketFrom.close();
 		if (socketTo.isClosed()) socketTo.close();

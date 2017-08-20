@@ -18,6 +18,7 @@ public class Listener  implements Runnable {
 			while (true) {
 				System.out.println(String.format("Service %s listener in port %d", service.getName(), service.getPortFrom()));
 				Socket socketFrom = service.getServerSocket().accept();
+				@SuppressWarnings("resource")
 				Connection connection = new Connection(this, socketFrom);
 				connection.open();
 			}
