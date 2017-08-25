@@ -17,13 +17,14 @@ import javax.xml.bind.JAXB;
  */
 public class VirtualServer {
 
-	public static void main(String... args) throws IOException {
+	public static void main(String... args) {
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(args[0]), "*.xml")) {
 			stream.forEach((file) -> {
 				JAXB.unmarshal(file.toFile(), Service.class).init();
 			});
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.exit(-1);
 		}
 	}
 }
